@@ -1,6 +1,7 @@
 package com.liyc.dao;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @package com.liyc.dao
@@ -23,15 +25,17 @@ public class Role implements Serializable{
 	private static final long serialVersionUID = 4272964744767057L;
 	@Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String name;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "uid")
 	private User user;
-	public Integer getId() {
+	@Transient
+	private Set<Authority> authoritys;
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -46,5 +50,11 @@ public class Role implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
+  public Set<Authority> getAuthoritys() {
+    return authoritys;
+  }
+  public void setAuthoritys(Set<Authority> authoritys) {
+    this.authoritys = authoritys;
+  }
 	
 }

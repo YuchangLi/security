@@ -1,8 +1,12 @@
 package com.liyc;
 
+import java.util.Date;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import com.liyc.config.Appctx;
 import com.liyc.dao.Role;
@@ -26,7 +30,8 @@ public class Application {
 	  	user.setEmail("648821884@qq.com");
 	    BCryptPasswordEncoder bc=new BCryptPasswordEncoder(4);
 	    user.setPassword(bc.encode("123456")); 
-	    userService.update(user);  
+	    user.setCreateTime(new Date());
+	    userService.update(user);
 	    System.out.println(user.getId());
 	    Role role = new Role();
 	    role.setName("ADMIN");
@@ -34,5 +39,5 @@ public class Application {
 	    roleRepository.save(role);
   	}
   }
-
+  
 }

@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,6 +32,7 @@ public class User implements Serializable{
 	private String password;
 	@Column(name="create_time")
 	private Date createTime;
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Role> roles;
 	
