@@ -27,10 +27,18 @@ public class SecurityUser extends User implements UserDetails {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		Set<Role> userRoles = this.getRoles();
 		if (userRoles != null) {
-			for (Role role : userRoles) {
-				SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
-				authorities.add(authority);
-			}
+			userRoles.forEach(role->{
+				System.out.println("role: "+role.getName());
+				Set<Authority> authoritys = role.getAuthoritys();
+				if(authoritys!=null){
+					System.out.print(" auths: ");
+					authoritys.parallelStream().forEach(auth->{
+						System.out.print(auth.getUrl()+";");
+						SimpleGrantedAuthority authority = new SimpleGrantedAuthority(auth.getUrl());
+						authorities.add(authority);
+					});
+				}
+			});
 		}
 		return authorities;
 	}

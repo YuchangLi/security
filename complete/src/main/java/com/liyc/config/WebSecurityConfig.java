@@ -74,6 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       List<Authority> authoritys = this.authorityRepository.findAll();
       authoritys.parallelStream().forEach(authority->{
         try {
+        	System.out.println("authority="+authority.getUrl());
           http.authorizeRequests().antMatchers(authority.getUrl()).hasAuthority(authority.getUrl());
         } catch (Exception e) {
           e.printStackTrace();

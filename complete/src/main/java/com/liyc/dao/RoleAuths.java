@@ -22,26 +22,26 @@ public class RoleAuths implements Serializable{
   @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
   @Column(name="role_id")
-  private Long role_id;
+  private Long roleId;
   @Column(name="auth_id")
-  private Long auth_id;
+  private Long authId;
   public Long getId() {
     return id;
   }
   public void setId(Long id) {
     this.id = id;
   }
-  public Long getRole_id() {
-    return role_id;
-  }
-  public void setRole_id(Long role_id) {
-    this.role_id = role_id;
-  }
-  public Long getAuth_id() {
-    return auth_id;
-  }
-  public void setAuth_id(Long auth_id) {
-    this.auth_id = auth_id;
-  }
+	public Long getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+	public Long getAuthId() {
+		return authId;
+	}
+	public void setAuthId(Long authId) {
+		this.authId = authId;
+	}
   
 }

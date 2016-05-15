@@ -1,14 +1,17 @@
 package com.liyc.dao;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +27,11 @@ public class Authority implements Serializable{
   @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String url;
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+  @JoinTable(name = "s_role_auths", 
+          joinColumns = { @JoinColumn(name = "auth_id", referencedColumnName = "id", insertable = false, updatable = false) }, 
+          inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id", insertable = false, updatable = false) })
+	private Set<Role> roles ;
 	public Integer getId() {
 		return id;
 	}
@@ -36,5 +44,11 @@ public class Authority implements Serializable{
   public void setUrl(String url) {
     this.url = url;
   }
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 	
 }

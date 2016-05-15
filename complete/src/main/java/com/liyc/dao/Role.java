@@ -9,9 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  * @package com.liyc.dao
@@ -28,9 +28,9 @@ public class Role implements Serializable{
 	private Long id;
 	private String name;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "uid")
+	@JoinColumn(name = "uid", insertable = false, updatable = false)
 	private User user;
-	@Transient
+	@ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER)
 	private Set<Authority> authoritys;
 	public Long getId() {
 		return id;
